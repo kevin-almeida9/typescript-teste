@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/mongoose": "^5.7.36",
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
     "ts-node": "^9.0.0",
