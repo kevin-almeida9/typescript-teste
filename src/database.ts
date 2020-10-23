@@ -1,8 +1,10 @@
-import mongoose from 'mongoose';
+  
+import mongoose from 'mongoose'
 
 
-mongoose.connect('mongodb+srv://robertvitoriano:1234@cluster0.btwq6.mongodb.net/typescript?retryWrites=true&w=majority',{ useUnifiedTopology: true },()=>{
-    console.log('I"m connected');
-});
-
-
+mongoose.connect("mongodb+srv://robertvitoriano:oe1Vm3E0pNNvcacJ@cluster0.btwq6.mongodb.net/TYPESCRIPT?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+},()=>{console.log('Im connected to mongodb')});

@@ -3,7 +3,10 @@ import noteController from './controllers/noteController';
 const router = express.Router();
 
 
-router.post('/',noteController.store)
+router.post('/create',noteController.store);
+router.get('/list',noteController.list);
+
+
 
 
 

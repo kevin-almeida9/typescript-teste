@@ -2,9 +2,8 @@ import mongoose from 'mongoose'
 
 import  INote  from '../interfaces/INote'
 
-const { ObjectId } = mongoose.Types
-
-const NoteObject = {
+const NoteSchema: mongoose.Schema = new mongoose.Schema({
+    
     title:{
         type:String,
         required:true
@@ -12,11 +11,11 @@ const NoteObject = {
     body:{
         type:String
     }
-}
-
-const NoteSchema: mongoose.Schema = new mongoose.Schema(
-  NoteObject, { timestamps: true }
+}, { timestamps: true }
 )
 
 
-export default mongoose.model<INote>('Note', NoteSchema)
+
+const model = mongoose.model<INote>('Note', NoteSchema);
+
+export default  model;
