@@ -4,8 +4,6 @@ import  INote  from '../interfaces/INote'
 
 const { ObjectId } = mongoose.Types
 
-
-
 const NoteObject = {
     title:{
         type:String,
@@ -14,10 +12,6 @@ const NoteObject = {
     body:{
         type:String
     }
-
-    
-
-
 }
 
 const NoteSchema: mongoose.Schema = new mongoose.Schema(
