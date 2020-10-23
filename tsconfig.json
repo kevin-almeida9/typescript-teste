@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "rootDir": "./src",
+      "strict": true,         
+      "noImplicitAny": false,
+      "esModuleInterop": true,
+      "allowJs": true,
+      "declaration": false,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true
+     }
+  }
+  
