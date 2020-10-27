@@ -30,7 +30,7 @@ const A = (props: any) => {
 
             {c ? (<button
                 onClick={e => {
-                    console.log(e)
+                    console.error(e)
                     setB(!b)
                     setC(!c)
 
@@ -39,7 +39,7 @@ const A = (props: any) => {
             </button>
             ) : <button
                 onClick={e => {
-                    console.log(e)
+                    console.error(e)
                     setB(!b)
                     setC(!c)
                     handleUpdate(e)

@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import api from '../../services/api'
-import { receiveApiData,remove } from './actions'
+import { receiveApiData, remove, add } from './actions'
 
 const loadNotes = async () => {
     const test = await api.get('notes')
@@ -12,6 +12,11 @@ const removeNote = async (id: string) => {
     return response
 }
 
+const addNote = async (payload: any) => {
+    let result: any = await api.post('notes', { ...payload })
+    return result.data
+}
+
 
 function* getApiData() {
     try {
@@ -19,12 +24,11 @@ function* getApiData() {
         const data = yield call(loadNotes)
         yield put(receiveApiData(data));
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 }
 
 function* deleteNote(payload: any) {
-    console.log("deleteNOte",payload.id)
     try {
         yield call(removeNote, payload.id);
         yield put(remove(payload.id))
@@ -33,6 +37,14 @@ function* deleteNote(payload: any) {
     }
 }
 
+function* createNote(action: any) {
+    try {
+        const data = yield call(addNote, action.payload);
+        yield put(add(data))
+    } catch (e) {
+        console.error(e);
+    }
+}
 /*
   Alternatively you may use takeLatest.
   Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
@@ -43,6 +55,7 @@ export default function* mySaga() {
     all([
         yield takeLatest("REQUEST_API_DATA", getApiData),
         //@ts-ignore
-        yield takeLatest("REQUEST_DELETE", deleteNote)
+        yield takeLatest("REQUEST_DELETE", deleteNote),
+        yield takeLatest("REQUEST_CREATE", createNote)
     ])
 }

@@ -1,5 +1,6 @@
 import INote from '../../interfaces/INote'
 
+export const requestCreate = (data:any) => ({ type: "REQUEST_CREATE", payload: data })
 export const add = (note: INote) => {
     return {
         type: 'ADD',

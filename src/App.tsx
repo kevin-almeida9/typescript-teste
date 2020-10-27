@@ -1,30 +1,30 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
-import api from './services/api'
 import { Cardnote } from './styles/styles'
 import { connect } from 'react-redux'
-import { requestApiData,requestDelete } from './store/notes/actions'
+import { requestApiData,requestDelete,requestCreate } from './store/notes/actions'
 
 import A from './A'
-import INote from './interfaces/INote'
+// import INote from './interfaces/INote'
 
 
 function App({ notesStore, dispatch }: any) {
-  const [notes, setNotes] = useState<INote[]>([]);
+  // const [notes, setNotes] = useState<INote[]>([]);
   const [b, setB] = useState<boolean>(false)
   const [title, setTitle] = useState<string>('')
   const [body, setBody] = useState<string>('')
 
   useEffect(() => {
-    setNotes(dispatch(requestApiData()))
+    dispatch(requestApiData())
   }, [dispatch]);
 
   const handleCreate = async (e: MouseEvent) => {
     e.preventDefault()
-    let result: any = await api.post('notes', { title: title, body: body })
-    const {
-      _id,
-    } = result.data
-    setNotes([...notes, { _id: _id, title: title, body: body }])
+    dispatch(requestCreate({ title: title, body: body }))
+    // let result: any = await api.post('notes', { title: title, body: body })
+    // const {
+    //   _id,
+    // } = result.data
+    // setNotes([...notes, { _id: _id, title: title, body: body }])
     setB(false)
     setTitle('')
     setBody('')

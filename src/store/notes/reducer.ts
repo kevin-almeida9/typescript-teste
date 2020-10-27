@@ -8,13 +8,15 @@ const noteReducer = (state: any = [], action: any) => {
 
 
         case 'ADD':
-
-            break;
+            const {
+                _id,
+                title,
+                body
+            } = action.payload
+            return [...state, { _id, title, body }]
 
         case 'REMOVE':
-            return state.filter((note:any) => note._id !== action.payload)
-            break;
-
+            return state.filter((note: any) => note._id !== action.payload)
         default:
             return state;
 
