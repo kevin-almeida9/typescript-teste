@@ -10,6 +10,8 @@ const rootReducer = combineReducers({
     notes: noteReducer
 })
 
+
+
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
 
 sagaMiddleware.run(mySaga)

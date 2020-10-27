@@ -2,7 +2,7 @@ import React, { useEffect, useState, MouseEvent } from 'react';
 import api from './services/api'
 import { Cardnote } from './styles/styles'
 import { connect } from 'react-redux'
-import { requestApiData } from './store/notes/actions'
+import { requestApiData,requestDelete } from './store/notes/actions'
 
 import A from './A'
 import INote from './interfaces/INote'
@@ -15,9 +15,6 @@ function App({ notesStore, dispatch }: any) {
   const [body, setBody] = useState<string>('')
 
   useEffect(() => {
-    // api.get('notes').then(response => {
-    //   setNotes(response.data);
-    // })
     setNotes(dispatch(requestApiData()))
   }, [dispatch]);
 
@@ -34,8 +31,9 @@ function App({ notesStore, dispatch }: any) {
   }
 
   const handleDelete = async (id: string) => {
-    await api.delete(`notes/${id}`)
-    setNotes(notes.filter(note => note._id !== id))
+    // await api.delete(`notes/${id}`)
+    // setNotes(notes.filter(note => note._id !== id))
+    dispatch(requestDelete(id))
   }
 
   return (

@@ -1,6 +1,6 @@
 import INote from '../../interfaces/INote'
 
-export const add = (note:INote) => {
+export const add = (note: INote) => {
     return {
         type: 'ADD',
         payload: note
@@ -14,8 +14,9 @@ export const update = (id: string, body: string) => {
     }
 }
 export const requestApiData = () => ({ type: "REQUEST_API_DATA" });
-export const receiveApiData = (data:Array<Object>) => ({ type: "RECEIVE_API_DATA", payload: data });
+export const receiveApiData = (data: Array<Object>) => ({ type: "RECEIVE_API_DATA", payload: data });
 
+export const requestDelete = (id: string) => ({ type: "REQUEST_DELETE", id: id })
 export const remove = (id: string) => {
     return {
         type: 'REMOVE',

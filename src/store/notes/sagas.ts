@@ -1,21 +1,35 @@
-import { call, put,takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 import api from '../../services/api'
-import { receiveApiData } from './actions'
+import { receiveApiData,remove } from './actions'
 
 const loadNotes = async () => {
     const test = await api.get('notes')
-    console.log(test.data)
     return test.data
 }
 
+const removeNote = async (id: string) => {
+    const response = await api.delete(`notes/${id}`)
+    return response
+}
 
-function* getApiData(action: any) {
+
+function* getApiData() {
     try {
         // do api call
         const data = yield call(loadNotes)
         yield put(receiveApiData(data));
     } catch (e) {
         console.log(e);
+    }
+}
+
+function* deleteNote(payload: any) {
+    console.log("deleteNOte",payload.id)
+    try {
+        yield call(removeNote, payload.id);
+        yield put(remove(payload.id))
+    } catch (e) {
+        console.error(e);
     }
 }
 
@@ -26,5 +40,9 @@ function* getApiData(action: any) {
   and only the latest one will be run.
 */
 export default function* mySaga() {
-    yield takeLatest("REQUEST_API_DATA", getApiData);
+    all([
+        yield takeLatest("REQUEST_API_DATA", getApiData),
+        //@ts-ignore
+        yield takeLatest("REQUEST_DELETE", deleteNote)
+    ])
 }
